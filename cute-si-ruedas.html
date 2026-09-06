@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technology &amp; Entrepreneurship: Building the Future, One Idea at a Time</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EAF0F6;
+    --paper-line:#C3D4E3;
+    --ink:#10233A;
+    --ink-soft:#3C5871;
+    --tech:#0E8F8A;
+    --spark:#E0932F;
+    --white:#FFFFFF;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    margin:0;
+    background:
+      linear-gradient(var(--paper-line) 1px, transparent 1px) 0 0/40px 40px,
+      linear-gradient(90deg, var(--paper-line) 1px, transparent 1px) 0 0/40px 40px,
+      var(--paper);
+    color:var(--ink);
+    font-family:'Source Serif 4', serif;
+    line-height:1.65;
+  }
+
+  .mono{ font-family:'JetBrains Mono', monospace; }
+
+  a{ color:var(--tech); }
+  a:focus-visible, button:focus-visible{ outline:3px solid var(--spark); outline-offset:2px; }
+
+  /* ---------- navigation ---------- */
+  nav.topnav{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:rgba(234,240,246,.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1.5px solid var(--ink);
+  }
+  .nav-inner{
+    max-width:920px;
+    margin:0 auto;
+    padding:0 28px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:56px;
+  }
+  .nav-brand{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    font-weight:700;
+    color:var(--ink);
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .nav-brand .dot{
+    width:8px; height:8px; border-radius:50%;
+    background:var(--spark);
+    display:inline-block;
+  }
+  .nav-links{
+    display:flex;
+    gap:26px;
+    list-style:none;
+    margin:0; padding:0;
+  }
+  .nav-links a{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    text-decoration:none;
+    color:var(--ink-soft);
+    padding:4px 2px;
+    border-bottom:2px solid transparent;
+    transition:color .15s ease, border-color .15s ease;
+  }
+  .nav-links a:hover{ color:var(--ink); }
+  .nav-links a.active{
+    color:var(--tech);
+    border-bottom-color:var(--tech);
+  }
+  .nav-progress{
+    position:absolute;
+    left:0; bottom:-1.5px;
+    height:2px;
+    width:0%;
+    background:var(--spark);
+    transition:width .1s linear;
+  }
+  .nav-toggle{
+    display:none;
+    background:none;
+    border:1.5px solid var(--ink);
+    border-radius:4px;
+    width:34px; height:34px;
+    cursor:pointer;
+    align-items:center;
+    justify-content:center;
+    color:var(--ink);
+  }
+  .nav-toggle svg{ width:18px; height:18px; }
+
+  @media (max-width:640px){
+    .nav-links{
+      position:fixed;
+      top:56px; left:0; right:0;
+      background:var(--paper);
+      border-bottom:1.5px solid var(--ink);
+      flex-direction:column;
+      gap:0;
+      max-height:0;
+      overflow:hidden;
+      transition:max-height .25s ease;
+    }
+    .nav-links.open{ max-height:320px; }
+    .nav-links a{
+      padding:14px 28px;
+      width:100%;
+      border-bottom:1px solid var(--paper-line);
+      border-left:3px solid transparent;
+    }
+    .nav-links a.active{ border-left-color:var(--tech); border-bottom-color:var(--paper-line); }
+    .nav-toggle{ display:flex; }
+  }
+
+  /* ---------- corner crop marks, blueprint framing ---------- */
+  .sheet{
+    max-width:920px;
+    margin:0 auto;
+    padding:0 28px 80px;
+    position:relative;
+  }
+
+  .crop{
+    position:fixed;
+    width:22px; height:22px;
+    border-color:var(--ink);
+    opacity:.45;
+    z-index:5;
+  }
+  .crop.tl{ top:14px; left:14px; border-top:2px solid; border-left:2px solid; }
+  .crop.tr{ top:14px; right:14px; border-top:2px solid; border-right:2px solid; }
+  .crop.bl{ bottom:14px; left:14px; border-bottom:2px solid; border-left:2px solid; }
+  .crop.br{ bottom:14px; right:14px; border-bottom:2px solid; border-right:2px solid; }
+
+  /* ---------- hero ---------- */
+  header.hero{
+    padding:56px 0 50px;
+    border-bottom:1.5px solid var(--ink);
+  }
+  .eyebrow{
+    font-size:12.5px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:22px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:26px; height:1px;
+    background:var(--spark);
+  }
+  h1{
+    font-family:'JetBrains Mono', monospace;
+    font-weight:700;
+    font-size:clamp(30px, 5.4vw, 52px);
+    line-height:1.08;
+    letter-spacing:-.01em;
+    margin:0 0 22px;
+  }
+  h1 .accent{ color:var(--tech); }
+  .dek{
+    font-size:19px;
+    color:var(--ink-soft);
+    max-width:60ch;
+    margin:0;
+  }
+
+  /* ---------- intro ---------- */
+  .intro{
+    padding:44px 0 10px;
+    display:grid;
+    grid-template-columns:64px 1fr;
+    gap:20px;
+  }
+  .intro .tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--tech);
+    writing-mode:vertical-lr;
+    text-transform:uppercase;
+    letter-spacing:.14em;
+  }
+  .intro p{ font-size:18px; margin:0; }
+
+  /* ---------- circuit divider (signature element) ---------- */
+  .trace{ width:100%; height:70px; margin:36px 0; display:block; }
+  .trace path{ fill:none; stroke:var(--ink-soft); stroke-width:1.5; opacity:.55; }
+  .trace circle{ fill:var(--paper); stroke:var(--tech); stroke-width:2; }
+  .trace .spark-node{ stroke:var(--spark); }
+  .trace text{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    fill:var(--ink-soft);
+    text-transform:uppercase;
+    letter-spacing:.08em;
+  }
+
+  /* ---------- sections ---------- */
+  section.chapter{ padding:34px 0 8px; }
+  .chapter-head{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin-bottom:6px;
+  }
+  .chapter-num{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--spark);
+    border:1px solid var(--spark);
+    border-radius:3px;
+    padding:2px 7px;
+  }
+  h2{
+    font-family:'JetBrains Mono', monospace;
+    font-size:clamp(22px, 3.2vw, 28px);
+    margin:0;
+    letter-spacing:-.01em;
+  }
+  h3{
+    font-family:'JetBrains Mono', monospace;
+    font-size:15.5px;
+    color:var(--tech);
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    margin:26px 0 10px;
+  }
+  p{ font-size:16.5px; margin:0 0 16px; max-width:70ch; }
+
+  figure{ margin:26px 0; }
+  figure img{
+    width:100%;
+    height:auto;
+    display:block;
+    border:1px solid var(--ink);
+    filter:grayscale(18%) contrast(1.03);
+  }
+  figcaption{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-top:8px;
+  }
+
+  ul, ol{
+    margin:0 0 18px;
+    padding-left:22px;
+    font-size:16.5px;
+  }
+  li{ margin-bottom:8px; }
+  li::marker{ color:var(--tech); font-family:'JetBrains Mono', monospace; }
+
+  .fact{
+    border-left:3px solid var(--spark);
+    padding:12px 18px;
+    margin:20px 0;
+    background:rgba(224,147,47,.08);
+    font-size:15.5px;
+  }
+  .fact .mono{ display:block; font-size:11px; color:var(--spark); margin-bottom:4px; text-transform:uppercase; letter-spacing:.08em; }
+
+  .sources{
+    margin-top:8px;
+    font-size:15px;
+    padding-left:0;
+    list-style:none;
+  }
+  .sources li{
+    display:flex;
+    gap:10px;
+    align-items:baseline;
+    border-bottom:1px dashed var(--paper-line);
+    padding-bottom:10px;
+  }
+  .sources li::before{
+    content:"↗";
+    color:var(--tech);
+    font-family:'JetBrains Mono', monospace;
+  }
+
+  /* ---------- stats counters ---------- */
+  .stats-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:16px;
+    margin:20px 0 10px;
+  }
+  .stat-card{
+    border:1px solid var(--paper-line);
+    background:var(--white);
+    padding:18px 16px;
+    border-radius:4px;
+  }
+  .stat-num{
+    font-family:'JetBrains Mono', monospace;
+    font-size:clamp(26px, 4vw, 34px);
+    font-weight:700;
+    color:var(--tech);
+    line-height:1;
+  }
+  .stat-label{
+    font-size:13px;
+    color:var(--ink-soft);
+    margin-top:8px;
+  }
+  @media (max-width:600px){ .stats-grid{ grid-template-columns:1fr 1fr; } }
+
+  /* ---------- tabs ---------- */
+  .tabs{ margin:20px 0; }
+  .tab-buttons{
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+    border-bottom:1.5px solid var(--ink);
+    margin-bottom:18px;
+  }
+  .tab-btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    background:none;
+    border:none;
+    padding:10px 14px;
+    cursor:pointer;
+    color:var(--ink-soft);
+    border-bottom:3px solid transparent;
+    margin-bottom:-1.5px;
+    transition:color .15s ease;
+  }
+  .tab-btn:hover{ color:var(--ink); }
+  .tab-btn.active{ color:var(--tech); border-bottom-color:var(--tech); }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; animation:fadeIn .25s ease; }
+  @keyframes fadeIn{ from{ opacity:0; transform:translateY(4px); } to{ opacity:1; transform:translateY(0); } }
+  .tab-panel table{ width:100%; border-collapse:collapse; font-size:15px; margin-top:6px; }
+  .tab-panel th, .tab-panel td{ text-align:left; padding:9px 10px; border-bottom:1px dashed var(--paper-line); }
+  .tab-panel th{ font-family:'JetBrains Mono', monospace; font-size:11.5px; text-transform:uppercase; color:var(--ink-soft); letter-spacing:.05em; }
+
+  /* ---------- accordion (FAQ) ---------- */
+  .accordion{ margin:18px 0; border-top:1px solid var(--paper-line); }
+  .acc-item{ border-bottom:1px solid var(--paper-line); }
+  .acc-trigger{
+    width:100%;
+    text-align:left;
+    background:none;
+    border:none;
+    padding:16px 4px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    cursor:pointer;
+    font-family:'Source Serif 4', serif;
+    font-weight:600;
+    font-size:16.5px;
+    color:var(--ink);
+  }
+  .acc-trigger .plus{
+    font-family:'JetBrains Mono', monospace;
+    color:var(--spark);
+    font-size:18px;
+    flex-shrink:0;
+    transition:transform .2s ease;
+  }
+  .acc-trigger[aria-expanded="true"] .plus{ transform:rotate(45deg); }
+  .acc-panel{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .25s ease;
+  }
+  .acc-panel p{ padding:0 4px 16px; font-size:15.5px; }
+
+  /* ---------- glossary ---------- */
+  .glossary-search{
+    width:100%;
+    font-family:'JetBrains Mono', monospace;
+    font-size:14px;
+    padding:11px 14px;
+    border:1.5px solid var(--ink);
+    border-radius:4px;
+    background:var(--white);
+    color:var(--ink);
+    margin-bottom:16px;
+  }
+  .glossary-search:focus{ outline:2px solid var(--tech); outline-offset:1px; }
+  .glossary-list{ display:grid; gap:10px; }
+  .glossary-item{
+    border:1px solid var(--paper-line);
+    background:var(--white);
+    border-radius:4px;
+    padding:12px 16px;
+  }
+  .glossary-term{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13.5px;
+    color:var(--tech);
+    text-transform:uppercase;
+    letter-spacing:.04em;
+  }
+  .glossary-item p{ margin:6px 0 0; font-size:15px; }
+  .glossary-empty{ display:none; font-size:14.5px; color:var(--ink-soft); font-style:italic; }
+
+  /* ---------- back to top ---------- */
+  .back-to-top{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    width:44px; height:44px;
+    border-radius:50%;
+    background:var(--ink);
+    color:var(--paper);
+    border:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    opacity:0;
+    pointer-events:none;
+    transform:translateY(8px);
+    transition:opacity .2s ease, transform .2s ease;
+    z-index:15;
+  }
+  .back-to-top.visible{ opacity:1; pointer-events:auto; transform:translateY(0); }
+  .back-to-top svg{ width:18px; height:18px; }
+
+  <!-- ---------- credits ---------- -->
+  .credits{
+    margin-top:60px;
+    padding-top:28px;
+    border-top:1.5px solid var(--ink);
+  }
+  .credits-head{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.14em;
+    color:var(--ink-soft);
+    margin-bottom:16px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .credits-head::before{
+    content:"";
+    width:26px; height:1px;
+    background:var(--spark);
+  }
+  .credits-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:10px 24px;
+  }
+  .credit-item{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    padding:9px 0;
+    border-bottom:1px dashed var(--paper-line);
+    font-size:14.5px;
+  }
+  .credit-name{ color:var(--ink); font-weight:600; }
+  .credit-role{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    color:var(--tech);
+    white-space:nowrap;
+  }
+  @media (max-width:600px){ .credits-grid{ grid-template-columns:1fr; } }
+
+  footer{
+    margin-top:28px;
+    padding-top:20px;
+    border-top:none;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  @media (max-width:600px){
+    .intro{ grid-template-columns:1fr; }
+    .intro .tag{ writing-mode:horizontal-tb; }
+    .crop{ display:none; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="crop tl"></div>
+<div class="crop tr"></div>
+<div class="crop bl"></div>
+<div class="crop br"></div>
+
+<nav class="topnav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-brand"><span class="dot"></span>TECH×FOUNDER</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#rise" data-nav>01 Rise</a></li>
+      <li><a href="#build" data-nav>02 Build</a></li>
+      <li><a href="#scale" data-nav>03 Scale</a></li>
+      <li><a href="#skills" data-nav>04 Skills</a></li>
+      <li><a href="#numbers" data-nav>05 Numbers</a></li>
+      <li><a href="#funding" data-nav>06 Funding</a></li>
+      <li><a href="#faq" data-nav>07 FAQ</a></li>
+      <li><a href="#glossary" data-nav>08 Glossary</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="nav-progress" id="navProgress"></div>
+</nav>
+
+<div class="sheet" id="top">
+
+  <header class="hero">
+    <div class="eyebrow mono">Field Notes · Technology &amp; Entrepreneurship</div>
+    <h1>Building the Future,<br>One <span class="accent">Idea</span> at a Time</h1>
+    <p class="dek">How technology gives entrepreneurs the tools to turn small ideas into businesses that change how people live and work.</p>
+  </header>
+
+  <div class="intro">
+    <div class="tag mono">Intro</div>
+    <p>
+      Technology and entrepreneurship have become two sides of the same coin. Entrepreneurship is the drive to solve
+      real problems by starting something new, while technology is the toolkit that makes those solutions possible
+      at scale. Today, a single person with a laptop can build software used by millions, and a small team can launch
+      a company that reshapes an entire industry. This matters because the skills behind it, spotting a problem,
+      building a working solution, and getting it into people's hands, are useful far beyond the tech industry.
+      Understanding how technology and entrepreneurship work together helps students, workers, and future founders
+      see opportunity where others see obstacles, and gives them a starting point for turning their own ideas
+      into something real.
+    </p>
+  </div>
+
+  <svg class="trace" viewBox="0 0 860 70" preserveAspectRatio="none" role="presentation" aria-hidden="true">
+    <path d="M20,35 H260 M340,35 H540 M620,35 H840"></path>
+    <circle class="spark-node" cx="20" cy="35" r="6"></circle>
+    <circle cx="300" cy="35" r="6"></circle>
+    <circle cx="580" cy="35" r="6"></circle>
+    <circle class="spark-node" cx="840" cy="35" r="6"></circle>
+    <text x="0" y="18">idea</text>
+    <text x="270" y="18">build</text>
+    <text x="550" y="18">scale</text>
+  </svg>
+
+  <!-- SECTION 1 -->
+  <section class="chapter" id="rise">
+    <div class="chapter-head">
+      <span class="chapter-num mono">01</span>
+      <h2>The Rise of Tech Entrepreneurship</h2>
+    </div>
+
+    <p>
+      A generation ago, starting a company meant renting an office, buying equipment, and raising a large amount
+      of capital before selling a single product. Cloud computing, open-source software, and app marketplaces
+      have collapsed that cost. A founder can now rent computing power by the hour, publish an app to a global
+      audience overnight, and test an idea with real customers within weeks instead of years.
+    </p>
+
+    <h3>Why It Happened Now</h3>
+    <p>
+      Three forces converged: cheap and powerful cloud infrastructure, near-universal smartphone access, and
+      payment systems that let anyone, anywhere, buy a digital product in seconds. Together, they turned the
+      internet into a low-cost proving ground for new ideas.
+    </p>
+
+    <div class="fact">
+      <span class="mono">Fact</span>
+      Many of the world's best-known startups, including Airbnb and Dropbox, were built by small founding teams
+      who launched a basic version of their product before hiring a large staff or renting an office.
+    </div>
+
+    <figure>
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80"
+           alt="A small team of entrepreneurs gathered around a laptop, discussing a project in a bright workspace">
+      <figcaption class="mono">fig. 01 — early-stage teams often work lean, testing ideas before scaling up</figcaption>
+    </figure>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section class="chapter" id="build">
+    <div class="chapter-head">
+      <span class="chapter-num mono">02</span>
+      <h2>From Idea to Minimum Viable Product</h2>
+    </div>
+
+    <p>
+      Entrepreneurs rarely launch a finished product. Instead, they build a Minimum Viable Product, or MVP: the
+      smallest version of an idea that still solves the core problem. The goal is to learn from real users as
+      early and cheaply as possible, rather than guessing what they want for months in private.
+    </p>
+
+    <h3>A Typical Path from Idea to Launch</h3>
+    <ol>
+      <li><strong>Identify the problem</strong> — talk to real people before writing any code.</li>
+      <li><strong>Sketch the solution</strong> — map out the smallest useful version of the product.</li>
+      <li><strong>Build the MVP</strong> — use existing tools and platforms instead of building everything from scratch.</li>
+      <li><strong>Launch to a small audience</strong> — collect honest feedback quickly.</li>
+      <li><strong>Iterate</strong> — improve the product based on what users actually do, not just what they say.</li>
+    </ol>
+
+    <p>
+      For example, a founder building a scheduling app for tutors might start with a simple form and a shared
+      calendar, rather than a full mobile app with payments and messaging built in. If tutors actually use it,
+      the harder features get built next.
+    </p>
+
+    <figure>
+      <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=80"
+           alt="Close-up of a laptop screen showing lines of code being written">
+      <figcaption class="mono">fig. 02 — an MVP is written to test a hypothesis, not to be perfect</figcaption>
+    </figure>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section class="chapter" id="scale">
+    <div class="chapter-head">
+      <span class="chapter-num mono">03</span>
+      <h2>Scaling with Emerging Technology</h2>
+    </div>
+
+    <p>
+      Once a product finds real users, technology becomes the lever that lets a small team serve a large number
+      of people without a matching increase in staff. Cloud servers expand automatically as traffic grows, and
+      artificial intelligence now handles tasks that once needed entire departments.
+    </p>
+
+    <h3>Where Entrepreneurs Are Using AI Today</h3>
+    <ul>
+      <li><strong>Customer support</strong> — chatbots answer common questions instantly, day or night.</li>
+      <li><strong>Content and design</strong> — founders draft marketing copy and prototypes far faster than before.</li>
+      <li><strong>Data and forecasting</strong> — small businesses predict demand and manage inventory with tools once limited to large corporations.</li>
+    </ul>
+
+    <div class="fact">
+      <span class="mono">Fact</span>
+      Cloud platforms let a startup pay only for the computing power it actually uses, so costs rise gradually
+      with growth instead of requiring a large upfront investment in servers.
+    </div>
+
+    <figure>
+      <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1200&q=80"
+           alt="A robotic hand reaching toward a human hand, symbolizing collaboration between people and AI technology">
+      <figcaption class="mono">fig. 03 — emerging technology increasingly works alongside people, not just for them</figcaption>
+    </figure>
+
+    <p>
+      The trade-off is that scaling fast also scales mistakes fast. A bug in an MVP might affect a dozen users;
+      the same bug in a scaled product can affect millions before anyone notices. That's why entrepreneurs learn
+      to grow deliberately, using data to guide each step instead of expanding blindly.
+    </p>
+  </section>
+
+  <!-- SECTION 4 -->
+  <section class="chapter" id="skills">
+    <div class="chapter-head">
+      <span class="chapter-num mono">04</span>
+      <h2>Skills That Matter Most</h2>
+    </div>
+    <p>
+      Neither technology nor entrepreneurship rewards knowing everything, they reward knowing how to learn fast
+      and communicate clearly. The most useful skills tend to be the same ones taught in a good classroom:
+    </p>
+    <ul>
+      <li>Breaking a large, vague problem into small, testable steps</li>
+      <li>Reading data honestly, even when it disagrees with your assumptions</li>
+      <li>Explaining a technical idea simply enough for a non-expert to act on it</li>
+      <li>Staying comfortable with being wrong early, so you can be right later</li>
+    </ul>
+
+    <h3>Further Reading</h3>
+    <ul class="sources">
+      <li><a href="https://www.ycombinator.com/library" target="_blank" rel="noopener">Y Combinator Startup Library</a> — practical guidance on building and launching early-stage companies.</li>
+      <li><a href="https://techcrunch.com/" target="_blank" rel="noopener">TechCrunch</a> — daily coverage of startups, funding, and new technology.</li>
+      <li><a href="https://www.weforum.org/topics/entrepreneurship/" target="_blank" rel="noopener">World Economic Forum — Entrepreneurship</a> — research on how entrepreneurship drives economic growth worldwide.</li>
+    </ul>
+  </section>
+
+  <!-- SECTION 5: STATS -->
+  <section class="chapter" id="numbers">
+    <div class="chapter-head">
+      <span class="chapter-num mono">05</span>
+      <h2>Tech Entrepreneurship, By the Numbers</h2>
+    </div>
+    <p>
+      Numbers help make an abstract trend concrete. The figures below (rounded, for illustration) count up when
+      they scroll into view — click any card to see a one-line note on why that number matters.
+    </p>
+    <div class="stats-grid">
+      <button class="stat-card" data-note="Most successful products go through several failed versions first — the number itself matters less than the habit of trying again.">
+        <div class="stat-num mono" data-target="90" data-suffix="%">0%</div>
+        <div class="stat-label">of startups fail within their first few years, most from building something nobody needed</div>
+      </button>
+      <button class="stat-card" data-note="Small teams can move faster because there are fewer people to coordinate with before making a decision.">
+        <div class="stat-num mono" data-target="2" data-suffix="">0</div>
+        <div class="stat-label">average co-founders on record-setting startup teams like Google and Apple</div>
+      </button>
+      <button class="stat-card" data-note="Cloud pricing means a founder can test an idea for the cost of a few coffees instead of a business loan.">
+        <div class="stat-num mono" data-target="100" data-suffix="+">0</div>
+        <div class="stat-label">dollars can be enough to rent the cloud servers needed to launch a basic MVP for a month</div>
+      </button>
+      <button class="stat-card" data-note="Speed to market matters, but only once the product actually solves the problem it was built for.">
+        <div class="stat-num mono" data-target="6" data-suffix="wk">0</div>
+        <div class="stat-label">a realistic timeline for a small team to build and launch a first testable MVP</div>
+      </button>
+    </div>
+    <p id="statNote" class="fact" style="display:none;"><span class="mono">Why it matters</span><span id="statNoteText"></span></p>
+  </section>
+
+  <!-- SECTION 6: FUNDING TABS -->
+  <section class="chapter" id="funding">
+    <div class="chapter-head">
+      <span class="chapter-num mono">06</span>
+      <h2>Bootstrapping vs. Venture Funding</h2>
+    </div>
+    <p>
+      Once an MVP shows promise, founders face a choice: grow slowly using their own money and early revenue
+      (bootstrapping), or raise money from investors in exchange for a share of the company (venture funding).
+      Neither path is universally "better" — they trade off speed, control, and risk differently.
+    </p>
+
+    <div class="tabs">
+      <div class="tab-buttons" role="tablist">
+        <button class="tab-btn active" role="tab" aria-selected="true" data-tab="bootstrap">Bootstrapping</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="venture">Venture Funding</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="compare">Side by Side</button>
+      </div>
+
+      <div class="tab-panel active" data-panel="bootstrap">
+        <h3>Growing on Your Own Terms</h3>
+        <p>Bootstrapped founders fund the business with personal savings and early customer revenue. Growth is
+        usually slower, but founders keep full control and decision-making stays fast since there's no board to
+        convince first.</p>
+        <ul>
+          <li>Best when the product can start earning revenue quickly</li>
+          <li>Forces discipline — every feature has to justify its cost</li>
+          <li>Founders keep 100% ownership and full decision-making power</li>
+        </ul>
+      </div>
+
+      <div class="tab-panel" data-panel="venture">
+        <h3>Trading Ownership for Speed</h3>
+        <p>Venture-funded founders raise money from investors who believe the company can grow very large. The
+        cash lets a team hire faster and out-build competitors, but it comes with pressure to grow quickly and
+        answer to a board of directors.</p>
+        <ul>
+          <li>Best when the market opportunity is large and speed matters more than caution</li>
+          <li>Provides capital to hire, market, and scale faster than revenue alone allows</li>
+          <li>Founders give up some ownership and decision-making control</li>
+        </ul>
+      </div>
+
+      <div class="tab-panel" data-panel="compare">
+        <h3>Quick Comparison</h3>
+        <table>
+          <thead><tr><th>Factor</th><th>Bootstrapping</th><th>Venture Funding</th></tr></thead>
+          <tbody>
+            <tr><td>Ownership</td><td>Founder keeps full control</td><td>Shared with investors</td></tr>
+            <tr><td>Growth speed</td><td>Usually slower, steady</td><td>Often faster, higher-pressure</td></tr>
+            <tr><td>Risk</td><td>Founder absorbs it personally</td><td>Shared with investors</td></tr>
+            <tr><td>Best fit</td><td>Niche or service-based products</td><td>Large, fast-moving markets</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7: FAQ ACCORDION -->
+  <section class="chapter" id="faq">
+    <div class="chapter-head">
+      <span class="chapter-num mono">07</span>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+    <p>Common questions students and first-time founders ask when they start exploring this topic.</p>
+
+    <div class="accordion" id="faqAccordion">
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false">
+          Do I need to know how to code to start a tech company?
+          <span class="plus mono">+</span>
+        </button>
+        <div class="acc-panel">
+          <p>No. Many successful founders are not programmers themselves; they partner with a technical
+          co-founder, hire developers, or use no-code tools to build a first version of their idea. Knowing the
+          basics helps you communicate with a technical team, but it isn't a hard requirement.</p>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false">
+          What's the difference between a startup and a small business?
+          <span class="plus mono">+</span>
+        </button>
+        <div class="acc-panel">
+          <p>A small business is usually built to run steadily and profitably at a modest size, like a local
+          shop. A startup is usually built with the intent to grow very quickly and reach a large market,
+          often using technology to do so, even if it means losing money in the early years to grow faster.</p>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false">
+          How do founders decide what problem to solve?
+          <span class="plus mono">+</span>
+        </button>
+        <div class="acc-panel">
+          <p>Most start with a problem they've personally experienced or observed closely, then check whether
+          other people share that same problem before building anything. Talking to potential users early
+          avoids spending months building something nobody actually wants.</p>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false">
+          Is failure really that common in this space?
+          <span class="plus mono">+</span>
+        </button>
+        <div class="acc-panel">
+          <p>Yes, and most experienced founders treat it as part of the process rather than a final outcome.
+          Many successful entrepreneurs had at least one earlier venture that didn't work out, and the lessons
+          from that attempt often shape what makes their next one succeed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 8: GLOSSARY -->
+  <section class="chapter" id="glossary">
+    <div class="chapter-head">
+      <span class="chapter-num mono">08</span>
+      <h2>Glossary of Key Terms</h2>
+    </div>
+    <p>Type in the box below to filter terms — useful as a quick-reference while reading or studying.</p>
+
+    <input type="text" class="glossary-search" id="glossarySearch" placeholder="Search terms, e.g. &quot;MVP&quot; or &quot;cloud&quot;...">
+
+    <div class="glossary-list" id="glossaryList">
+      <div class="glossary-item" data-term="mvp minimum viable product">
+        <div class="glossary-term mono">MVP</div>
+        <p>Minimum Viable Product — the smallest working version of a product that still solves the core problem, built to test an idea with real users.</p>
+      </div>
+      <div class="glossary-item" data-term="bootstrapping">
+        <div class="glossary-term mono">Bootstrapping</div>
+        <p>Growing a company using personal savings and early revenue instead of outside investment.</p>
+      </div>
+      <div class="glossary-item" data-term="venture capital vc funding">
+        <div class="glossary-term mono">Venture Capital</div>
+        <p>Money invested by firms or individuals into early-stage companies in exchange for partial ownership, usually in hopes of a large future return.</p>
+      </div>
+      <div class="glossary-item" data-term="cloud computing infrastructure">
+        <div class="glossary-term mono">Cloud Computing</div>
+        <p>Renting computing power and storage over the internet instead of buying and maintaining physical servers.</p>
+      </div>
+      <div class="glossary-item" data-term="iterate iteration">
+        <div class="glossary-term mono">Iterate</div>
+        <p>To repeatedly improve a product in small steps based on real feedback and data, rather than trying to get it perfect on the first try.</p>
+      </div>
+      <div class="glossary-item" data-term="pivot">
+        <div class="glossary-term mono">Pivot</div>
+        <p>A significant change in a company's strategy or product direction, usually made after learning the original plan wasn't working.</p>
+      </div>
+      <div class="glossary-item" data-term="scale scaling">
+        <div class="glossary-term mono">Scale</div>
+        <p>Growing a business so it can serve many more customers without a matching increase in cost or staff.</p>
+      </div>
+      <div class="glossary-item" data-term="founder co-founder">
+        <div class="glossary-term mono">Founder</div>
+        <p>A person who starts a company, often taking on financial and personal risk to bring an idea to life.</p>
+      </div>
+    </div>
+    <p class="glossary-empty" id="glossaryEmpty">No terms match your search.</p>
+  </section>
+
+  <div class="credits">
+    <div class="credits-head">Group 1</div>
+    <div class="credits-grid">
+      <div class="credit-item"><span class="credit-name">Bryce P. Abarquez</span><span class="credit-role">Presenter</span></div>
+      <div class="credit-item"><span class="credit-name">Aihrex Bejagan</span><span class="credit-role">Content Writer</span></div>
+      <div class="credit-item"><span class="credit-name">Lyle Angelo Basona</span><span class="credit-role">Web Designer</span></div>
+      <div class="credit-item"><span class="credit-name">Wiljhon Cortuna</span><span class="credit-role">Researcher</span></div>
+      <div class="credit-item"><span class="credit-name">Rendy Nice Dela Pieza</span><span class="credit-role">Content Researcher</span></div>
+      <div class="credit-item"><span class="credit-name">Wesly Lim</span><span class="credit-role">Researcher</span></div>
+      <div class="credit-item"><span class="credit-name">Jet Ray Ruedas</span><span class="credit-role">WebPage Creator</span></div>
+      <div class="credit-item"><span class="credit-name">Renerose Resurreccion</span><span class="credit-role">Publisher</span></div>
+    </div>
+  </div>
+
+  <footer>
+    <span>Technology &amp; Entrepreneurship — Field Notes</span>
+    <span>Written for classroom use</span>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+  </button>
+
+</div>
+
+<script>
+  // Mobile menu toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Active section highlighting via IntersectionObserver
+  const sections = document.querySelectorAll('section.chapter[id]');
+  const navItems = document.querySelectorAll('.nav-links a[data-nav]');
+  const setActive = (id) => {
+    navItems.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+  };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) setActive(entry.target.id);
+    });
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+  sections.forEach(sec => observer.observe(sec));
+
+  // Scroll progress indicator under the nav bar
+  const navProgress = document.getElementById('navProgress');
+  const updateProgress = () => {
+    const doc = document.documentElement;
+    const scrolled = doc.scrollTop;
+    const height = doc.scrollHeight - doc.clientHeight;
+    const pct = height > 0 ? (scrolled / height) * 100 : 0;
+    navProgress.style.width = pct + '%';
+  };
+  document.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  // Animated stat counters (count up when scrolled into view)
+  const statCards = document.querySelectorAll('.stat-card');
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const numEl = entry.target.querySelector('.stat-num');
+      if (numEl.dataset.done) return;
+      numEl.dataset.done = 'true';
+      const target = parseInt(numEl.dataset.target, 10);
+      const suffix = numEl.dataset.suffix || '';
+      const duration = 900;
+      const start = performance.now();
+      const tick = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        numEl.textContent = Math.round(eased * target) + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+  }, { threshold: 0.4 });
+  statCards.forEach(card => statObserver.observe(card));
+
+  // Clicking a stat card reveals a short note on why it matters
+  const statNote = document.getElementById('statNote');
+  const statNoteText = document.getElementById('statNoteText');
+  statCards.forEach(card => {
+    card.addEventListener('click', () => {
+      statNoteText.textContent = ' ' + card.dataset.note;
+      statNote.style.display = 'block';
+      statNote.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  });
+
+  // Tab switching (Bootstrapping / Venture Funding / Side by Side)
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabButtons.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+      tabPanels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      document.querySelector(`.tab-panel[data-panel="${btn.dataset.tab}"]`).classList.add('active');
+    });
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.acc-trigger').forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const panel = trigger.nextElementSibling;
+      const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', String(!isOpen));
+      panel.style.maxHeight = isOpen ? null : panel.scrollHeight + 'px';
+    });
+  });
+
+  // Glossary live search filter
+  const glossarySearch = document.getElementById('glossarySearch');
+  const glossaryItems = document.querySelectorAll('.glossary-item');
+  const glossaryEmpty = document.getElementById('glossaryEmpty');
+  glossarySearch.addEventListener('input', () => {
+    const query = glossarySearch.value.trim().toLowerCase();
+    let visibleCount = 0;
+    glossaryItems.forEach(item => {
+      const match = item.dataset.term.includes(query) || item.textContent.toLowerCase().includes(query);
+      item.style.display = match ? '' : 'none';
+      if (match) visibleCount++;
+    });
+    glossaryEmpty.style.display = visibleCount === 0 ? 'block' : 'none';
+  });
+
+  // Back-to-top button
+  const backToTop = document.getElementById('backToTop');
+  document.addEventListener('scroll', () => {
+    backToTop.classList.toggle('visible', document.documentElement.scrollTop > 500);
+  }, { passive: true });
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+</body>
+</html>
